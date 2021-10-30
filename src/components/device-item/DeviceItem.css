@@ -1,0 +1,14 @@
+.device-item {
+  border: 1px solid orange;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.delete-device-item {
+  position: absolute;
+  right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
