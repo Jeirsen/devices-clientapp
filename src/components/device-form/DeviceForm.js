@@ -1,28 +1,49 @@
 import './DeviceForm.css';
-import { Redirect, useParams } from 'react-router';
-import { useState } from 'react';
+import { Redirect, useParams, useHistory } from 'react-router';
+import { useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const DeviceForm = () => {
   const { action } = useParams();
+  const history = useHistory();
+  const location = useLocation();
+  const [params, setParams] = useState(null);
   const [systemName, setSystemName] = useState('');
   const [type, setType] = useState('none');
   const [hddCapacity, setHddCapacity] = useState('');
   const [error, setError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  useEffect(async () => {
+    if (action === 'edit') {
+      try {
+        const queryParams = new URLSearchParams(location.search);
+        let id = queryParams.get('id');
+        setParams(id);
+        let response = await axios.get(`http://localhost:3000/devices/${id}`);
+        let { data } = response;
+        setSystemName(data.system_name);
+        setType(data.type);
+        setHddCapacity(data.hdd_capacity);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (action === 'add') {
-      if (systemName === '' || type === 'none' || hddCapacity === '') {
-        setError(true);
-        return;
-      }
+    if (systemName === '' || type === 'none' || hddCapacity === '') {
+      setError(true);
+      return;
+    }
 
+    if (action === 'add') {
       setError(false);
       try {
-        let response = await axios.post('http://localhost:3000/devices', {
+        await axios.post('http://localhost:3000/devices', {
           system_name: systemName,
           type: type,
           hdd_capacity: hddCapacity,
@@ -37,7 +58,22 @@ const DeviceForm = () => {
         console.log(error);
       }
     } else {
-      // Update
+      setError(false);
+      try {
+        await axios.put(`http://localhost:3000/devices/${params}`, {
+          system_name: systemName,
+          type: type,
+          hdd_capacity: hddCapacity,
+        });
+
+        setSystemName('');
+        setType('none');
+        setHddCapacity('');
+        setIsSuccess(true);
+      } catch (error) {
+        setIsSuccess(false);
+        console.log(error);
+      }
     }
   };
 
@@ -56,7 +92,9 @@ const DeviceForm = () => {
     setHddCapacity(value);
   };
 
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    history.push('/');
+  };
 
   return (
     <div className="device-form-container">
@@ -79,9 +117,9 @@ const DeviceForm = () => {
           <label htmlFor="type">Type *</label>
           <select value={type} onChange={(e) => setType(e.target.value)}>
             <option value="none">Select an option</option>
-            <option value="Windows Server">Windows Server</option>
-            <option value="Windows WorkStation">Windows Workstation</option>
-            <option value="Mac">Mac</option>
+            <option value="WINDOWS_SERVER">Windows Server</option>
+            <option value="WINDOWS_WORKSTATION">Windows Workstation</option>
+            <option value="MAC">Mac</option>
           </select>
         </div>
         <div className="field">

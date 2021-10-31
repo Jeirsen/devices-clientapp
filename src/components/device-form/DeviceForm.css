@@ -11,6 +11,7 @@ h1 {
   border-top: 1px solid #2b4259;
   border-left: 1px solid #2b4259;
   border-right: 1px solid #2b4259;
+  border-radius: 5px 5px 0px 0px;
 }
 
 form {
@@ -18,6 +19,7 @@ form {
   border: 1px solid #2b4259;
   margin: 0 auto;
   padding: 2rem;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .field {

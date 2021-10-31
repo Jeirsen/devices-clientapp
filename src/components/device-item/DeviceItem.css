@@ -1,20 +1,21 @@
 .device-item {
-  border: 1px solid #2b4259;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d0d0d0;
+  border-radius: 5px;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-  position: relative;
 }
 
-.delete-device-item {
-  position: absolute;
-  right: 10px;
-  font-size: 14px;
+.device-info > p:first-of-type {
   font-weight: bold;
-  cursor: pointer;
+  font-size: 16px;
+  color: #2b4259;
 }
 
-.device-item-type {
-  color: #2b4259;
+.device-small {
+  font-size: 14px;
 }
 
 .error {
