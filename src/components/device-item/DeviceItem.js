@@ -10,7 +10,7 @@ const DeviceItem = ({
         X
       </span>
       <p>{system_name}</p>
-      <p>{type}</p>
+      <p className="device-item-type">{type}</p>
       <p>{hdd_capacity} GB</p>
     </div>
   );

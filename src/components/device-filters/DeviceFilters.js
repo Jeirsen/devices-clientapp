@@ -8,7 +8,7 @@ const DeviceFilters = ({ onFilterBy, onSortBy }) => {
         <select onChange={onFilterBy}>
           <option value="All">All</option>
           <option value="Windows Server">Windows Server</option>
-          <option value="Windows WorkStation">Windows WorkStation</option>
+          <option value="Windows WorkStation">Windows Workstation</option>
           <option value="Mac">Mac</option>
         </select>
       </div>

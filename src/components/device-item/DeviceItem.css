@@ -1,5 +1,5 @@
 .device-item {
-  border: 1px solid orange;
+  border: 1px solid #2b4259;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   position: relative;
@@ -11,4 +11,14 @@
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.device-item-type {
+  color: #2b4259;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 1rem;
 }

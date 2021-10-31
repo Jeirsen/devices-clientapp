@@ -4,3 +4,56 @@
   padding-bottom: 2rem;
   background-color: #d0d0d0;
 }
+
+input[type='text'],
+input[type='number'] {
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 0px;
+  outline: none;
+  box-shadow: none;
+  height: 35px;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+select {
+  height: 30px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.btn-primary {
+  padding: 5px 10px;
+  margin: 0 10px;
+  border: 2px solid #2b4259;
+  border-radius: 5px;
+  background: #2b4259;
+  outline: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  padding: 5px 10px;
+  margin: 0 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  background: white;
+  outline: none;
+  color: gray;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}

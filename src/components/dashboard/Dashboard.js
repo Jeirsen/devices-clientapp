@@ -10,27 +10,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState('All');
 
-  // [
-  //   {
-  //     id: 1,
-  //     systemName: 'SUSAN DESKTOP',
-  //     type: 'Windows WorkStation',
-  //     hddCapacity: 128,
-  //   },
-  //   {
-  //     id: 2,
-  //     systemName: 'MAC-LOCAL-FREDDY',
-  //     type: 'Mac',
-  //     hddCapacity: 256,
-  //   },
-  //   {
-  //     id: 3,
-  //     systemName: 'SMART-SERVER',
-  //     type: 'Windows Server',
-  //     hddCapacity: 1024,
-  //   },
-  // ]
-
   useEffect(async () => {
     let response = await axios.get('http://localhost:3000/devices');
     setDevices(response.data);

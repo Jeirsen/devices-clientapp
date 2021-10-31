@@ -3,19 +3,3 @@
   margin: 2rem 0;
   gap: 1.5rem;
 }
-
-.filter-option {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-select {
-  height: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0 0.5em;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: #fff;
-}

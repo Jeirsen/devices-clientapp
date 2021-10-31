@@ -6,15 +6,16 @@
 
 h1 {
   text-align: center;
+  font-size: 22px;
   line-height: 5rem;
-  border-top: 1px solid orange;
-  border-left: 1px solid orange;
-  border-right: 1px solid orange;
+  border-top: 1px solid #2b4259;
+  border-left: 1px solid #2b4259;
+  border-right: 1px solid #2b4259;
 }
 
 form {
   width: 40rem;
-  border: 1px solid orange;
+  border: 1px solid #2b4259;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -32,18 +33,9 @@ label {
   text-align: center;
 }
 
-input[type='text'],
-input[type='number'] {
-  font-size: 16px;
-  width: 100%;
-  border: none;
-  padding: 13px 0px 13px 0px;
-  border-radius: 0px;
-  outline: none;
-  box-shadow: none;
-  height: 35px;
-}
-
-input[type='number'] {
-  -moz-appearance: textfield;
+.action-btns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
