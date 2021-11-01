@@ -1,6 +1,6 @@
 # Devices Cliente App
 
-This project will make calls to Server Application provided by the company Ninja which should be running on http://localhost:3000
+This project will make API calls to backend server application provided by the Ninja developers which should be running on http://localhost:3000
 
 ## To get this project up and running...
 
