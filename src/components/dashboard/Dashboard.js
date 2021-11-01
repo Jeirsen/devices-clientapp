@@ -10,16 +10,27 @@ const Dashboard = () => {
   let [devices, setDevices] = useState(null);
   let [filteredDevices, setFilteredDevices] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   let [currentFilter, setCurrentFilter] = useState('ALL');
   let [currentSort, setCurrentSort] = useState('NONE');
 
-  useEffect(async () => {
-    let response = await axios.get('http://localhost:3000/devices');
-    setDevices(response.data);
-    setFilteredDevices(response.data);
-    setCurrentFilter('ALL');
-    setCurrentSort('NONE');
-    setLoading(false);
+  useEffect(() => {
+    try {
+      async function getDevices() {
+        let response = await axios.get('http://localhost:3000/devices');
+        setDevices(response.data);
+        setFilteredDevices(response.data);
+        setCurrentFilter('ALL');
+        setCurrentSort('NONE');
+        setLoading(false);
+        setError(null);
+      }
+
+      getDevices();
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
   }, []);
 
   const handleFilter = (e) => {
@@ -62,8 +73,9 @@ const Dashboard = () => {
       await axios.delete(`http://localhost:3000/devices/${id}`);
       filteredDevices = filteredDevices.filter((device) => device.id !== id);
       setFilteredDevices(filteredDevices);
+      setError(null);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   };
 
@@ -75,6 +87,7 @@ const Dashboard = () => {
         onSort={handleSort}
         currentSort={currentSort}
       />
+      {error && <p className="error">{error}</p>}
       {loading && (
         <div style={{ textAlign: 'center' }}>...Loading Devices </div>
       )}

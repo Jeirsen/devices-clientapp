@@ -70,3 +70,9 @@ select {
   font-weight: 500;
   cursor: pointer;
 }
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 1rem;
+}

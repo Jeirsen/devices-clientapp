@@ -12,31 +12,35 @@ const DeviceForm = () => {
   const [systemName, setSystemName] = useState('');
   const [type, setType] = useState('none');
   const [hddCapacity, setHddCapacity] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (action === 'edit') {
       try {
-        const queryParams = new URLSearchParams(location.search);
-        let id = queryParams.get('id');
-        setParams(id);
-        let response = await axios.get(`http://localhost:3000/devices/${id}`);
-        let { data } = response;
-        setSystemName(data.system_name);
-        setType(data.type);
-        setHddCapacity(data.hdd_capacity);
+        async function getDevice() {
+          const queryParams = new URLSearchParams(location.search);
+          let id = queryParams.get('id');
+          setParams(id);
+          let response = await axios.get(`http://localhost:3000/devices/${id}`);
+          let { data } = response;
+          setSystemName(data.system_name);
+          setType(data.type);
+          setHddCapacity(data.hdd_capacity);
+        }
+
+        getDevice();
       } catch (error) {
-        console.log(error);
+        setError(error.message);
       }
     }
-  }, []);
+  }, [action, location.search]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (systemName === '' || type === 'none' || hddCapacity === '') {
-      setError(true);
+      setError('You must provide all required fields');
       return;
     }
 
@@ -55,7 +59,6 @@ const DeviceForm = () => {
         setIsSuccess(true);
       } catch (error) {
         setIsSuccess(false);
-        console.log(error);
       }
     } else {
       setError(false);
@@ -72,7 +75,7 @@ const DeviceForm = () => {
         setIsSuccess(true);
       } catch (error) {
         setIsSuccess(false);
-        console.log(error);
+        setError(error.message);
       }
     }
   };
@@ -103,7 +106,7 @@ const DeviceForm = () => {
       <h1>{action === 'add' ? 'Add Device' : 'Edit Device'}</h1>
 
       <form onSubmit={handleSubmit}>
-        {error && <p className="error">You must provide all required fields</p>}
+        {error && <p className="error">{error}</p>}
         <div className="field">
           <label htmlFor="systemName">System Name *</label>
           <input
